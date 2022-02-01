@@ -1,1 +1,1 @@
-web: bash launch.sh
+release: ./launch.sh
