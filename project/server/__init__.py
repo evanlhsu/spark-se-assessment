@@ -46,19 +46,15 @@ app.register_blueprint(auth_blueprint)
 @app.route("/users/index", methods=['GET'])
 def users():
     if request.method == 'GET':
-        users = User.query.all()
-        if len(users) == 0:
-            responseObject = {"message": "there are no users in the db"}
-        else:
-            users_list = []
-            for user in User.query.all():
-                users_list.append({
-                    "admin": user.admin,
-                    "email": user.email,
-                    "id": user.id,
-                    "registered_on": user.registered_on
-                })
-            responseObject = {"users": users_list}
+        users = []
+        for user in User.query.all():
+            users.append({
+                "admin": user.admin,
+                "email": user.email,
+                "id": user.id,
+                "registered_on": user.registered_on
+            })
+            responseObject = {"users": users}
     return make_response(jsonify(responseObject)), 201
 
 @app.cli.command()
