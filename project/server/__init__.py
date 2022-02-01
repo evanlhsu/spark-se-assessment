@@ -43,18 +43,17 @@ app.register_blueprint(auth_blueprint)
 
 
 # list all registered users
-@app.route("/users/index", methods=['GET'])
+@app.route("/users/index")
 def users():
-    if request.method == 'GET':
-        users = []
-        for user in User.query.all():
-            users.append({
-                "admin": user.admin,
-                "email": user.email,
-                "id": user.id,
-                "registered_on": user.registered_on
-            })
-            responseObject = {"users": users}
+    users = []
+    for user in User.query.all():
+        users.append({
+            "admin": user.admin,
+            "email": user.email,
+            "id": user.id,
+            "registered_on": user.registered_on
+        })
+        responseObject = {"users": users}
     return make_response(jsonify(responseObject)), 201
 
 @app.cli.command()
