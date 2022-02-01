@@ -1,2 +1,2 @@
 release: ./launch.sh
-web: gunicorn app:__init__
+web: gunicorn project.server:app
